@@ -21,13 +21,13 @@ int main() {
 		set_motor(1,255);
 		set_motor(2,-255);
 	}
-	else if ( parameter == 2){
+	else if (parameter == 2){
 		set_motor(1,-255);
 		set_motor(2,255);
 	}
 	else if (parameter == 0){
 		set_motor(1,255):
-		set motor(2,255);
+		set_motor(2,255);
 	}
 	
 return0;}
