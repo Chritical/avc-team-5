@@ -11,6 +11,9 @@ void right_wheel(int speed);
 
 boolean open_gate();  // True if successful
 
+int final SPEED = 127;
+int dv;
+
 int main()
 {
     init();
@@ -26,4 +29,9 @@ void left_wheel(int speed)
 void right_wheel(int speed)
 {
     set_motor(2, speed);
+}
+
+// Returns dv
+int read_white_line()
+{
 }
