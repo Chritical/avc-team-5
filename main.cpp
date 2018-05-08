@@ -2,10 +2,14 @@
 #include "E101.h"
 
 // All of these methods are subject to change
-int calculate_threshold();
+void drive();
 int read_white_line();
-void left_wheel();
-void right_wheel();
+int calculate_threshold();  // Parameters?
+
+void left_wheel(int speed);
+void right_wheel(int speed);
+
+boolean open_gate();  // True if successful
 
 int main()
 {
