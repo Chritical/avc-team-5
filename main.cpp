@@ -17,21 +17,29 @@ int dv;
 int main()
 {
     init();
-
+    
+    left_motor(speed);
+    right_motor(speed);
+    sleep1(5);
+    left_motor(0);
+    right_motor(0);
+systemctl restart systemd-logind
     return 0;
 }
 
 void left_wheel(int speed)
 {
-    set_motor(1, speed);
+    set_motor(2, speed);
 }
 
 void right_wheel(int speed)
 {
-    set_motor(2, speed);
+    set_motor(1, speed);
 }
 
 // Returns dv
 int read_white_line()
 {
+    // Take picture
+    // Scan through the centre row
 }
