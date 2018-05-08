@@ -150,6 +150,7 @@ int main()
     int thr = (max+min)/2;
     printf(" min=%d max=%d threshold=%d\n", min, max,thr);
     
+    int numWhite = 0;
     int whi[320];  // white pixels
     for (int i = 0; i <320;i++)
 	{
@@ -158,6 +159,7 @@ int main()
 		if ( pix > thr)
 		{
 			whi[i] = 1;
+			numWhite++;
 		}
     }
     
@@ -177,7 +179,7 @@ int main()
 	for (int i = 0; i<320; i++)
 	{
 		//whi[i] = whi[i]*-1;
-		error = error+(i-160)*whi[i];
+		error = error+((i-160)/numWhite)*whi[i];
 	}
 	
 	//for (int i = 160; i<320; i++)
@@ -186,6 +188,7 @@ int main()
 	//}
 	
 	printf("\n\n");
+	printf("numWhite: %d \n", numWhite);
     printf(" error: %d \n\n", error);
 	
 	
