@@ -18,16 +18,16 @@ int main() {
 	}
 	
 	if (parameter == 1){
-		set_motor(1,255);
-		set_motor(2,-255);
+		set_motor(1,127);
+		set_motor(2,-127);
 	}
 	else if (parameter == 2){
-		set_motor(1,-255);
-		set_motor(2,255);
+		set_motor(1,-127);
+		set_motor(2,127);
 	}
 	else if (parameter == 0){
-		set_motor(1,255):
-		set_motor(2,255);
+		set_motor(1,127):
+		set_motor(2,127);
 	}
 	
 return0;}
