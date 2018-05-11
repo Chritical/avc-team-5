@@ -14,9 +14,31 @@ boolean open_gate();  // True if successful
 int final SPEED = 127;
 int dv;
 
+int quad = 1;
+
 int main()
 {
     init();
+    
+    while (true)
+    {
+        switch (quad)
+        {
+            case 1:
+
+                
+                
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            default:
+                return -1;
+        }
+    }
     
     left_motor(speed);
     right_motor(speed);
@@ -39,6 +61,26 @@ void right_wheel(int speed)
 // Returns dv
 int read_white_line()
 {
+    // Initialise variables
+    int max = 0;
+    int min = 255;
+    int[] row_pixels = new int[320];
+    
     // Take picture
+    take_picture();
     // Scan through the centre row
+    
+    for (int i = 0; i < 320; i++)
+    {
+        int temp_pixel = get_pixel(120, i, 3);
+        
+        if (max < temp_pixel)
+        {
+            max = temp_pixel;
+        }
+        if (min > temp_pixel)
+        {
+            min = temp_pixel;
+        }
+    }
 }
