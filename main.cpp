@@ -23,7 +23,6 @@ int main()
     sleep1(5);
     left_motor(0);
     right_motor(0);
-systemctl restart systemd-logind
     return 0;
 }
 
