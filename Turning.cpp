@@ -7,15 +7,15 @@ int main() {
 	init();
 	}
 	
-	while (parameter == 1){
+	while (error >0){
 		set_motor(1,64);
 		set_motor(2,-64);
 	}
-	while (parameter == 2){
+	while (error < 0){
 		set_motor(1,-64);
 		set_motor(2,64);
 	}
-	while (parameter == 0){
+	while (error == 0){
 		set_motor(1,64):
 		set_motor(2,64);
 	}
