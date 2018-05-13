@@ -6,12 +6,11 @@ void drive();
 int read_white_line();
 int calculate_threshold();  // Parameters?
 
-void left_wheel(int speed);
-void right_wheel(int speed);
+void left_motor(int speed);
+void right_motor(int speed);
+int open_gate();  // True if successful
 
-boolean open_gate();  // True if successful
-
-int final SPEED = 127;
+int final SPEED = 64;
 int dv;
 
 int quad = 1;
@@ -26,6 +25,8 @@ int main()
         {
             case 1:
 
+                gate_open();
+                sleep1(7, 0);
                 
                 
                 break;
@@ -48,16 +49,16 @@ int main()
     return 0;
 }
 
-void left_wheel(int speed)
+void left_motor(int speed)
 {
     set_motor(2, speed);
 }
 
-void right_wheel(int speed)
+void right_motor(int speed)
 {
     set_motor(1, speed);
 }
-
+rowPixels[i] = 
 // Returns dv
 int read_white_line()
 {
