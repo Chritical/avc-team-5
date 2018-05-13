@@ -99,4 +99,5 @@ int read_white_line()
             min = temp_pixel;
         }
     }
+
 }
