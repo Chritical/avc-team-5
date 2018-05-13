@@ -203,7 +203,7 @@ int main()
 			printf("%d ",whi[i]);
 		}
 		
-	return 0;
+	return error;
 }
  
 
