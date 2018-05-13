@@ -14,7 +14,7 @@ int main() {
 	if (v_left > 255){
 		v_left = 255;
 	}
-	if (v_right >255){
+	if (v_right > 255){
 		v_right = 255;
 	}
 	
