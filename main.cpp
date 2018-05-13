@@ -11,6 +11,9 @@ void left_motor(int speed);
 void right_motor(int speed);
 int open_gate();  // True if successful
 
+void follow_line(int error);
+void Turn(v_left, v_right);
+
 int final SPEED = 64;
 int dv;
 
@@ -65,7 +68,11 @@ int open_gate(){
 	while(connect_to_server(ip, 1024)!=0){continue;}
 	printf("Connected");
 	char message[24] = "Please";
-	while(send_to_server(message) != 0){continue;}
+	while(send_to_server(message) != 0){continue;}#include <stdio.h>
+106
+#include <time.h>
+107
+#include "E101.h"
 	printf("Message sent");
 	char password[24] = "";
 	while(receive_from_server(password) != 0){continue;}
@@ -89,7 +96,6 @@ int read_white_line()
     for (int i = 0; i < 320; i++)
     {
         int temp_pixel = get_pixel(120, i, 3);
-        
         if (max < temp_pixel)
         {
             max = temp_pixel;
@@ -100,4 +106,39 @@ int read_white_line()
         }
     }
 
+}
+
+int follow_line(int error) {
+	int final v_go = SPEED;
+	int final Kp = 1;
+	double dv;
+	
+	while (true){
+		dv = error ∗ Kp;
+		v_left = v_go + dv;
+		v_right = v_go - dv;
+
+		if (v_left > 255){
+			v_left = 255;
+		}
+		if (v_right > 255){
+			v_right = 255;
+		}
+		if (error < 1000 && error > -1000){
+			Turn(v_left, v_right);
+		}
+		
+		if (error > 1000){
+			left_motor(0):
+			right_motor(0);	
+		}
+		
+	}
+	
+return 0;
+}
+
+void Turn(int v_left, int v_right) {
+	left_motor(v_right);
+	left_motor(v_left);
 }
