@@ -118,10 +118,12 @@ int main()
 		printf(" Can not open file\n");
 		return -1;
 	};
+	
+	
 	// save horizontal scan of the image into text file
 	FILE *scfile;
 	scfile = fopen("scan.txt","w");
-	int scan_row = 120;
+	int scan_row = 100;
 	for (int i = 0; i <320;i++)
 	{
 		int pix = get_pixel(scan_row,i,3);
@@ -129,10 +131,11 @@ int main()
 		fprintf(scfile,"%d %d\n",i,pix);
 		
 	}
+	
+	
 	fclose(scfile);
 
-     // 
-
+     
     int max = 0;
     int min =255;
    	for (int i = 0; i <320;i++)
@@ -146,13 +149,14 @@ int main()
 		{
 			min =pix;
 		}
-    }
-    int thr = (max+min)/2;
-    printf(" min=%d max=%d threshold=%d\n", min, max,thr);
-    
-    int numWhite = 0;
-    int whi[320];  // white pixels
-    for (int i = 0; i <320;i++)
+		
+    } 
+	int thr = (max+min)/2;
+	printf(" min=%d max=%d threshold=%d\n", min, max,thr);
+	
+	int numWhite = 0;
+	int whi[320];  // white pixels
+	for (int i = 0; i <320;i++)
 	{
 		whi[i]= 0 ;
 		int pix = get_pixel(scan_row,i,3);
@@ -161,13 +165,14 @@ int main()
 			whi[i] = 1;
 			numWhite++;
 		}
-    }
-    
-    for (int i = 0; i <320;i++)
+	}
+	
+	
+	for (int i = 0; i <320;i++)
 	{
 		printf("%d ",whi[i]);
-    }
-    printf("\n\n");
+	}
+	printf("\n\n");
 	
 	
 	
@@ -175,29 +180,29 @@ int main()
 	
 	
 	int error = 0;
+
 	
-	for (int i = 0; i<320; i++)
-	{
-		//whi[i] = whi[i]*-1;
-		error = error+((i-160)/numWhite)*whi[i];
-	}
-	
-	//for (int i = 160; i<320; i++)
-	//{
-		//error = error+whi[i];
-	//}
-	
-	printf("\n\n");
-	printf("numWhite: %d \n", numWhite);
-    printf(" error: %d \n\n", error);
-	
-	
-	for (int i = 0; i <320;i++)
-	{
-		printf("%d ",whi[i]);
-    }
-	
-	
+		for (int i = 0; i<320; i++)
+		{
+			error = error+((i-160)/numWhite)*whi[i];
+		}
+		
+		    if (max<150){ // if all black
+				error = -10000;
+			} else if (min>150){ //if all white
+				error = 10000;
+			}
+		
+		printf("\n\n");
+		printf("numWhite: %d \n", numWhite);
+		printf(" error: %d \n\n", error);
+		
+		
+		for (int i = 0; i <320;i++)
+		{
+			printf("%d ",whi[i]);
+		}
+		
 	return 0;
 }
  
