@@ -91,8 +91,8 @@ int read_white_line()
     
     // Take picture
     take_picture();
+	
     // Scan through the centre row
-    
     for (int i = 0; i < 320; i++)
     {
         int temp_pixel = get_pixel(120, i, 3);
