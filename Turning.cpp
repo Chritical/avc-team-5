@@ -3,8 +3,8 @@
 #include "E101.h"
 
 int main() {
-	v_go = 64;
-	Kp = 1;
+	int final v_go = 64;
+	int final Kp = 1;
 	dv = error ∗ Kp;
 	
 	init();
@@ -36,5 +36,8 @@ int main() {
 		set_motor(1,0):
 		set_motor(2,0);	
 	}
-	
+	void Turn_Left {
+		set_motor(1,v_left);
+		set_motor(2,v_right);
+	}
 return0;}
