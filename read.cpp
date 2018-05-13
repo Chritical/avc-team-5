@@ -187,12 +187,12 @@ int main()
 			error = error+((i-160)/numWhite)*whi[i];
 		}
 		
-		    if (max<150){ // if all black
-				error = -10000;
-			} else if (min>150){ //if all white
-				error = 10000;
-			}
-		
+	    	if (max<150){ // if all black
+			error = -10000;
+		} else if (min>150){ //if all white
+			error = 10000;
+		}
+
 		printf("\n\n");
 		printf("numWhite: %d \n", numWhite);
 		printf(" error: %d \n\n", error);
