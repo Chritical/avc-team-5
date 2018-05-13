@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #include "E101.h"
 
 // All of these methods are subject to change
@@ -59,9 +60,7 @@ void right_motor(int speed)
     set_motor(1, speed);
 }
 
-// Returns dv
-
-int gateOpen(){
+int open_gate(){
 	char ip[15] = "130.195.6.196";
 	while(connect_to_server(ip, 1024)!=0){continue;}
 	printf("Connected");
@@ -75,6 +74,7 @@ int gateOpen(){
 	return 0;
 } 
 
+// Returns dv
 int read_white_line()
 {
     // Initialise variables
