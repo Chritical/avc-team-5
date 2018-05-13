@@ -6,11 +6,13 @@ int main() {
 	v_go = 64;
 	Kp = 1;
 	dv = error ∗ Kp;
+	
+	init();
+	
+	dv = error ∗ Kp;
 	v_left = v_go + dv;
 	v_right = v_go - dv;
 	
-	
-	init();
 	if (v_left > 255){
 		v_left = 255;
 	}
