@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include "E101.h"
 
+void detection();
+
 int main(){
 	init();
+	detection();
 	return 0;
 }
 
@@ -12,7 +15,7 @@ bool horizLine = false;
 bool leftLine = true;
 bool rightLine = true;
 
-int detection(){
+void detection(){
 	while(true){
 		take_picture();
 		int column = 20;
