@@ -10,8 +10,10 @@ void right_motor(int speed);
 int open_gate();  // True if successful
 
 void Turn(int v_left, int v_right);
+int follow_line(int error);
+void detect_white_line();
 
-int SPEED = 32;
+int SPEED = 64;
 int dv;
 int quad = 2;
 
@@ -24,8 +26,6 @@ int main()
         switch (quad)
         {
             case 1:
-				
-				motor_test();
 
 //                 gate_open();
 //                 sleep1(7, 0);
@@ -74,7 +74,7 @@ int open_gate(){
 
 int detect_white_line() {
 	int max = 0;
-    	int min =255;
+	int min =255;
 	int scan_row = 120;
 	int error = 0;
 	int numWhite = 0;
@@ -97,7 +97,9 @@ int detect_white_line() {
 		
     	} 
 	
-	
+	                                
+28
+                                motor_test();
 	//find white and black pixels
 	int thr = (max+min)/2;	
 	for (int i = 0; i <320;i++)
@@ -124,6 +126,8 @@ int detect_white_line() {
 		error = 10000;
 	}
 	
+	follow_line(error);
+	
 	printf("error: %d", error);
 		
 return 0;
@@ -136,7 +140,7 @@ int follow_line(int error) {
 	int v_left;
 	int v_right;
 	
-	while (true){
+//	while (true){
 		dv = error * Kp;
 		v_left = v_go + dv;
 		v_right = v_go - dv;
@@ -154,7 +158,7 @@ int follow_line(int error) {
 		if (error > 1000){
 			left_motor(0);
 			right_motor(0);	
-		}
+//		}
 		
 	}
 	
