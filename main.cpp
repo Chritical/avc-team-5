@@ -11,10 +11,11 @@ void left_motor(int speed);
 void right_motor(int speed);
 int open_gate();  // True if successful
 
-void follow_line(int error);
-void Turn(v_left, v_right);
+int motor_test();
 
-int final SPEED = 32;
+void Turn(int v_left, int v_right);
+
+int SPEED = 32;
 int dv;
 
 int quad = 1;
@@ -47,17 +48,12 @@ int main()
         }
     }
     
-    left_motor(speed);
-    right_motor(speed);
-    sleep1(5);
-    left_motor(0);
-    right_motor(0);
     return 0;
 }
 
 void left_motor(int speed)
 {
-    set_motor(2, speed);
+    set_motor(2, -speed);
 }
 
 void right_motor(int speed)
@@ -70,7 +66,7 @@ int open_gate(){
 	while(connect_to_server(ip, 1024)!=0){continue;}
 	printf("Connected");
 	char message[24] = "Please";
-	while(send_to_server(message) != 0){continue;}#include <stdio.h>
+	while(send_to_server(message) != 0){continue;}
 	printf("Message sent");
 	char password[24] = "";
 	while(receive_from_server(password) != 0){continue;}
@@ -79,40 +75,15 @@ int open_gate(){
 	return 0;
 } 
 
-// Returns dv
-int read_white_line()
-{
-    // Initialise variables
-    int max = 0;
-    int min = 255;
-    int[] row_pixels = new int[320];
-    
-    // Take picture
-    take_picture();
-	
-    // Scan through the centre row
-    for (int i = 0; i < 320; i++)
-    {
-        int temp_pixel = get_pixel(120, i, 3);
-        if (max < temp_pixel)
-        {
-            max = temp_pixel;
-        }
-        if (min > temp_pixel)
-        {
-            min = temp_pixel;
-        }
-    }
-
-}
-
 int follow_line(int error) {
-	int final v_go = SPEED;
-	int final Kp = 1;
+	int v_go = SPEED;
+	double Kp = 1;
 	double dv;
+	int v_left;
+	int v_right;
 	
 	while (true){
-		dv = error ∗ Kp;
+		dv = error * Kp;
 		v_left = v_go + dv;
 		v_right = v_go - dv;
 
@@ -127,7 +98,7 @@ int follow_line(int error) {
 		}
 		
 		if (error > 1000){
-			left_motor(0):
+			left_motor(0);
 			right_motor(0);	
 		}
 		
@@ -139,19 +110,4 @@ return 0;
 void Turn(int v_left, int v_right) {
 	left_motor(v_right);
 	left_motor(v_left);
-}
-
-int motor_test()
-{
-	left_motor(SPEED);
-	right_motor(SPEED);
-	sleep1(2);
-	left_motor(0);
-	sleep1(2);
-	left_motor(SPEED);
-	right_motor(0);
-	sleep1(2);
-	left_motor(0);
-	right_motor(0);
-	return 0;
 }
