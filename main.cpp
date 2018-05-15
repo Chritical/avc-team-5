@@ -33,6 +33,8 @@ int main()
                 
                 break;
             case 2:
+			detect_white_line();
+			
                 break;
             case 3:
                 break;
@@ -69,6 +71,63 @@ int open_gate(){
 	printf("Message sent 2");
 	return 0;
 } 
+
+int detect_white_line() {
+	int max = 0;
+    	int min =255;
+	int scan_row = 120;
+	int error = 0;
+	int numWhite = 0;
+	int whi[320];  // white pixels
+	
+	take_picture();
+	
+	//find min and max
+   	for (int i = 0; i <320;i++)
+	{
+		int pix = get_pixel(scan_row,i,3);
+		if ( pix > max) 
+		{
+			max = pix;
+		}
+		if (pix < min)
+		{
+			min = pix;
+		}
+		
+    	} 
+	
+	
+	//find white and black pixels
+	int thr = (max+min)/2;	
+	for (int i = 0; i <320;i++)
+	{
+		whi[i]= 0 ;
+		int pix = get_pixel(scan_row,i,3);
+		if ( pix > thr)
+		{
+			whi[i] = 1;
+			numWhite++;
+		}
+	}
+		
+	
+	//calculate error
+	for (int i = 0; i<320; i++)
+	{
+		error = error+((i-160)/numWhite)*whi[i];
+	}
+
+	if (max<150){ // if all black
+		error = -10000;
+	} else if (min>150){ //if all white
+		error = 10000;
+	}
+	
+	printf("error: %d", error);
+		
+return 0;
+}
 
 int follow_line(int error) {
 	int v_go = SPEED;
