@@ -13,7 +13,7 @@ void Turn(int v_left, int v_right);
 
 int SPEED = 32;
 int dv;
-int quad = 1;
+int quad = 2;
 
 int main()
 {
