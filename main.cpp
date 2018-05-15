@@ -14,7 +14,7 @@ int open_gate();  // True if successful
 void follow_line(int error);
 void Turn(v_left, v_right);
 
-int final SPEED = 64;
+int final SPEED = 32;
 int dv;
 
 int quad = 1;
@@ -28,9 +28,11 @@ int main()
         switch (quad)
         {
             case 1:
+				
+				motor_test();
 
-                gate_open();
-                sleep1(7, 0);
+//                 gate_open();
+//                 sleep1(7, 0);
                 
                 
                 break;
@@ -69,10 +71,6 @@ int open_gate(){
 	printf("Connected");
 	char message[24] = "Please";
 	while(send_to_server(message) != 0){continue;}#include <stdio.h>
-106
-#include <time.h>
-107
-#include "E101.h"
 	printf("Message sent");
 	char password[24] = "";
 	while(receive_from_server(password) != 0){continue;}
@@ -141,4 +139,19 @@ return 0;
 void Turn(int v_left, int v_right) {
 	left_motor(v_right);
 	left_motor(v_left);
+}
+
+int motor_test()
+{
+	left_motor(SPEED);
+	right_motor(SPEED);
+	sleep1(2);
+	left_motor(0);
+	sleep1(2);
+	left_motor(SPEED);
+	right_motor(0);
+	sleep1(2);
+	left_motor(0);
+	right_motor(0);
+	return 0;
 }
