@@ -26,7 +26,7 @@ int main() {
 		
 		else if (error > 1000){
 			set_motor(1,v_go):
-			set_motor(2,v_go);	
+			set_motor(2,v_go);
 		}
 		
 	}
