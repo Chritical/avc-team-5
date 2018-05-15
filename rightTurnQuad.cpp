@@ -14,9 +14,11 @@ int width = 320;
 bool horizLine = false;
 bool leftLine = true;
 bool rightLine = true;
+bool fowardLine = true;
+bool turning = false;
 
 void detection(){
-	while(true){
+	while(!turning){
 		take_picture();
 		int column = 20;
 		int row = 120;
@@ -31,23 +33,40 @@ void detection(){
 					leftLine = false;
 				}
 			}
-			column += 20; //moves along the image
+			column += 20; //checks next point along the image
+		}
+		column = 160;
+		row = 320;
+		for(int i=0; i<4; i++){ //go through 4 points down the image
+			if(get_pixel(column, row, 0) != 0){
+				fowardLine = false; //checks if drive forward option is available
+			}
+			row -= 10; //checks next point down the image
 		}
 	}
-	printf("working");
+	printf("working "+leftLine);
+	printf(" : "+rightLine);
+	printf(" : "+fowardLine);
 	if(leftLine == rightLine){ //if both left and right turns are available
 		horizLine = true;
 	}
 }
 
 void turnRight(){
+	turning = true;
 	set_motor(1, speed);
 	set_motor(2, 0);
+	sleep1(1,0);
+	detection();
 }
 
 void turnLeft(){
+	turning = true;
 	set_motor(1, 0);
 	set_motor(2, speed);
+	sleep1(1,0);
+	turning = false;
+	detection();
 }
 
 void detectLeftTurn(){
@@ -57,5 +76,4 @@ void detectLeftTurn(){
 void detectRightTurn(){
 	turnRight();
 }
-
 
