@@ -50,12 +50,12 @@ int main()
 
 void left_motor(int speed)
 {
-    set_motor(2, -speed);
+    set_motor(2, speed);
 }
 
 void right_motor(int speed)
 {
-    set_motor(1, speed);
+    set_motor(1, -speed);
 }
 
 int open_gate(){
