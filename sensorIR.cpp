@@ -20,18 +20,24 @@ int main(){
  
  //leftIR further from wall than rightIR. frontIR is close to wall. Turn left 
  if(adc_left<adc_right && adc_front >= 300){  
-   turn_left();
+   turn_left();//duration long enough to turn 90
  }
  
  //rightIR further from wall than leftIR. frontIR is close to wall. Turn right
  else if(adc_right<adc_left && adc_front >= 300){ 
-   turn_right();
+   turn_right(); //duration long enough to turn 90
  }
     
  //rightIR, leftIR and frontIR have high readings. Turn around  
  else if(){
-   turn_around();
+   turn_right(); //duration long enough to turn 180
  }
+  //if left wall closer than right (values < 100) and front close to wall. Turn left
+  else if(left_sensor>right_sensor && adc_front >= 300){
+   turn_left(); //duration long enough to turn left 90
+  }
+ 
+ // go forward
  else{
  
  }
@@ -40,16 +46,24 @@ int main(){
 
 }
 
-void turn_left(int duration){ // Turns left
-sleep1(0, duration); 
+void turn_left(int duration){ // Turns left on spot
+   set_motor(1,32); //left motor
+   set_motor(2,64); //right motor
+
+   sleep1(0, duration); 
+   
+   set_motor(1,0); //left motor
+   set_motor(2,0); //right motor
 }
 
-void turn_right(int duration){ // Turns right
-sleep1(0, duration); 
-}
-
-void turn_around(int duration){ // Turns around 180
-sleep1(0, duration); 
+void turn_right(int duration){ // Turns right on spot
+   set_motor(1,64); //left motor
+   set_motor(2,32); //right motor
+   
+   sleep1(0, duration);
+   
+   set_motor(1,0); //left motor
+   set_motor(2,0); //right motor
 }
    
   }
