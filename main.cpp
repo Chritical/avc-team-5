@@ -4,20 +4,15 @@
 
 // All of these methods are subject to change
 void drive();
-int read_white_line();
-int calculate_threshold();  // Parameters?
 
 void left_motor(int speed);
 void right_motor(int speed);
 int open_gate();  // True if successful
 
-int motor_test();
-
 void Turn(int v_left, int v_right);
 
 int SPEED = 32;
 int dv;
-
 int quad = 1;
 
 int main()
