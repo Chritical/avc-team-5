@@ -26,14 +26,12 @@ int main()
         switch (quad)
         {
             case 1:
-
-//                 gate_open();
-//                 sleep1(7, 0);
-                
-                
+                gate_open();
+                sleep1(7, 0);
+		quad = 2;
                 break;
             case 2:
-			detect_white_line();
+		detect_white_line();
 			
                 break;
             case 3:
@@ -74,7 +72,7 @@ int open_gate(){
 
 int detect_white_line() {
 	int max = 0;
-	int min =255;
+	int min = 255;
 	int scan_row = 120;
 	int error = 0;
 	int numWhite = 0;
@@ -83,7 +81,7 @@ int detect_white_line() {
 	take_picture();
 	
 	//find min and max
-   	for (int i = 0; i <320;i++)
+   	for (int i = 0; i < 320; i++)
 	{
 		int pix = get_pixel(scan_row,i,3);
 		if ( pix > max) 
@@ -95,27 +93,23 @@ int detect_white_line() {
 			min = pix;
 		}
 		
-    	} 
+    } 
 	
-	                                
-28
-                                motor_test();
 	//find white and black pixels
 	int thr = (max+min)/2;	
-	for (int i = 0; i <320;i++)
+	for (int i = 0; i < 320; i++)
 	{
 		whi[i]= 0 ;
-		int pix = get_pixel(scan_row,i,3);
-		if ( pix > thr)
+		int pix = get_pixel(scan_row, i, 3);
+		if (pix > thr)
 		{
 			whi[i] = 1;
 			numWhite++;
 		}
 	}
-		
-	
+
 	//calculate error
-	for (int i = 0; i<320; i++)
+	for (int i = 0; i < 320; i++)
 	{
 		error = error+((i-160)/numWhite)*whi[i];
 	}
@@ -128,14 +122,14 @@ int detect_white_line() {
 	
 	follow_line(error);
 	
-	printf("error: %d", error);
+// 	printf("error: %d%n", error);
 		
 return 0;
 }
 
 int follow_line(int error) {
 	int v_go = SPEED;
-	double Kp = 1;
+	double Kp = 0.5;
 	double dv;
 	int v_left;
 	int v_right;
@@ -151,7 +145,8 @@ int follow_line(int error) {
 		if (v_right > 255){
 			v_right = 255;
 		}
-		if (error < 1000 && error > -1000){
+		if (error > -1000 && error < 1000){
+			printf("L: %d\tR: %d%n", v_left, v_right);
 			Turn(v_left, v_right);
 		}
 		
