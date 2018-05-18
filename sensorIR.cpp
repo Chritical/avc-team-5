@@ -39,7 +39,8 @@ int main(){
  
  // go forward
  else{
- 
+   set_motor(1,64); //left motor
+   set_motor(2,64); //right motor
  }
  
  }
