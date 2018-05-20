@@ -146,7 +146,7 @@ int follow_line(int error) {
 			v_right = 255;
 		}
 		if (error > -1000 && error < 1000){
-			printf("L: %d\tR: %d%n", v_left, v_right);
+			printf("L: %d    R: %d%n", v_left, v_right);
 			Turn(v_left, v_right);
 		}
 		
