@@ -8,7 +8,7 @@ void drive();
 void left_motor(int speed);
 void right_motor(int speed);
 int open_gate();  // True if successful
-
+int clamp(int val, int min, int max);
 void Turn(int v_left, int v_right);
 int follow_line(int error);
 int detect_white_line();
@@ -50,7 +50,6 @@ void left_motor(int speed)
 {
 	double s = speed * 1.5;
 	speed = (int) s;
-	
 	speed = clamp(speed, -255, 255);
 	
     set_motor(2, -speed);
@@ -67,7 +66,7 @@ int open_gate(){
 	printf("Connected");
 	char message[24] = "Please";
 	while(send_to_server(message) != 0){continue;}
-	printf("Message sent");
+	printf("Message sent");speed * 1.5;
 	char password[24] = "";
 	while(receive_from_server(password) != 0){continue;}
 	while(send_to_server(password) != 0){continue;}
@@ -108,7 +107,7 @@ int detect_white_line() {
 		int pix = get_pixel(scan_row, i, 3);
 		if (pix > thr)
 		{
-			whi[i] = 1;
+			whi[i] = 1;speed * 1.5;
 			numWhite++;
 		}
 	}
