@@ -2,6 +2,9 @@
 #include "E101.h"
 
 void detection();
+void turnLeft();
+void turnRight();
+void straight();
 
 int main(){
 	init();
@@ -10,11 +13,9 @@ int main(){
 }
 
 int speed = 64;
-int width = 320;
-bool horizLine = false;
 bool leftLine = true;
 bool rightLine = true;
-bool fowardLine = true;
+bool forwardLine = true;
 bool turning = false;
 
 void detection(){
@@ -28,7 +29,7 @@ void detection(){
 					rightLine = false;
 				}
 			}
-			if(i <= 5){//checks for a left turn
+			if(i <= 5){ //checks for a left turn
 				if(get_pixel(column, row, 0) != 0){
 					leftLine = false;
 				}
@@ -39,29 +40,41 @@ void detection(){
 		row = 320;
 		for(int i=0; i<4; i++){ //go through 4 points down the image
 			if(get_pixel(column, row, 0) != 0){
-				fowardLine = false; //checks if drive forward option is available
+				forwardLine = false; //checks if drive forward option is available
 			}
 			row -= 10; //checks next point down the image
 		}
+		if(forwardLine){
+			straight();
+		}else if(leftLine == rightLine){
+			turnRight();
+		}else if(leftLine){
+			turnLeft();
+		}else if(rightLine){
+			turnRight();
+		}
+		rightLine = true;
+		leftLine = true;
+		forwardLine = true;
 	}
 	printf("working "+leftLine);
 	printf(" : "+rightLine);
-	printf(" : "+fowardLine);
-	if(leftLine == rightLine){ //if both left and right turns are available
-		horizLine = true;
-	}
+	printf(" : "+forwardLine);
 }
 
 void turnRight(){
 	turning = true;
+	straight(); //moves straight to get to turn
 	set_motor(1, speed);
 	set_motor(2, 0);
 	sleep1(1,0);
-	detection();
+	turning = false;
+	detection(); //restarts camera up again
 }
 
 void turnLeft(){
 	turning = true;
+	straight();
 	set_motor(1, 0);
 	set_motor(2, speed);
 	sleep1(1,0);
@@ -69,11 +82,11 @@ void turnLeft(){
 	detection();
 }
 
-void detectLeftTurn(){
-	turnLeft();
+void straight(){ //move robot forward
+	turning = true;
+	set_motor(1, speed);
+	set_motor(2, speed);
+	sleep1(0,5000000);
+	turning = false;
+	detection();
 }
-
-void detectRightTurn(){
-	turnRight();
-}
-
