@@ -11,9 +11,9 @@ int open_gate();  // True if successful
 
 void Turn(int v_left, int v_right);
 int follow_line(int error);
-void detect_white_line();
+int detect_white_line();
 
-int SPEED = 64;
+int SPEED = 32;
 int dv;
 int quad = 2;
 
@@ -26,7 +26,7 @@ int main()
         switch (quad)
         {
             case 1:
-                gate_open();
+                open_gate();
                 sleep1(7, 0);
 		quad = 2;
                 break;
@@ -48,12 +48,17 @@ int main()
 
 void left_motor(int speed)
 {
-    set_motor(2, speed);
+	double s = speed * 1.5;
+	speed = (int) s;
+	
+	speed = clamp(speed, -255, 255);
+	
+    set_motor(2, -speed);
 }
 
 void right_motor(int speed)
 {
-    set_motor(1, -speed);
+    set_motor(1, speed);
 }
 
 int open_gate(){
@@ -146,7 +151,7 @@ int follow_line(int error) {
 			v_right = 255;
 		}
 		if (error > -1000 && error < 1000){
-			printf("L: %d    R: %d%n", v_left, v_right);
+			printf("L: %d    R: %d\n", v_left, v_right);
 			Turn(v_left, v_right);
 		}
 		
@@ -163,4 +168,20 @@ return 0;
 void Turn(int v_left, int v_right) {
 	right_motor(v_right);
 	left_motor(v_left);
+}
+
+int clamp(int val, int min, int max)
+{
+	if (val > max)
+	{
+		return max;
+	}
+	else if (val < min)
+	{
+		return min;
+	}
+	else
+	{
+		return val;
+	}
 }
