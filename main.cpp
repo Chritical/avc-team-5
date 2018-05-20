@@ -161,6 +161,6 @@ return 0;
 }
 
 void Turn(int v_left, int v_right) {
-	left_motor(v_right);
+	right_motor(v_right);
 	left_motor(v_left);
 }
