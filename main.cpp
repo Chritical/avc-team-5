@@ -48,7 +48,7 @@ int main()
 
 void left_motor(int speed)
 {
-	double s = speed * 1.5;
+	double s = speed * 1.2;
 	speed = (int) s;
 	speed = clamp(speed, -255, 255);
 	
@@ -133,15 +133,15 @@ return 0;
 
 int follow_line(int error) {
 	int v_go = SPEED;
-	double Kp = 0.5;
+	double Kp = 0.1;
 	double dv;
 	int v_left;
 	int v_right;
 	
 //	while (true){
 		dv = error * Kp;
-		v_left = v_go + dv;
-		v_right = v_go - dv;
+		v_right = v_go + dv;
+		v_left = v_go - dv;
 
 		if (v_left > 255){
 			v_left = 255;
