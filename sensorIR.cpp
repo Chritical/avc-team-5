@@ -1,7 +1,7 @@
 #include <stdio.h> 
 #include <time.h> 
 #include "E101.h"
-
+#include <string>
 
 int main(){
    init();
