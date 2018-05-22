@@ -37,7 +37,7 @@ void detection(){
 			column += 33; //checks next point along the image
 		}
 		column = 160;
-		row = 320;
+		row = 280;
 		for(int i=0; i<4; i++){ //go through 4 points down the image
 			if(get_pixel(column, row, 0) != 0){
 				forwardLine = false; //checks if drive forward option is available
