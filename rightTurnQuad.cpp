@@ -47,7 +47,7 @@ void detection(){
 		if(forwardLine){
 			straight();
 		}else if(leftLine == rightLine){
-			turnRight();
+			turnLeft();
 		}else if(leftLine){
 			turnLeft();
 		}else if(rightLine){
