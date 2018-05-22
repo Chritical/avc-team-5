@@ -87,6 +87,7 @@ void read(){
  adc_left = read_analog(0); //reads left IR value
  adc_front = read_analog(1); //reads front IR value
  adc_right = read_analog(2); //reads right IR value
+ print(adc_left+"L " + adc_front+"F "+ adc_right+"R");
 }
 }
 //300 front
