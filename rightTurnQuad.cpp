@@ -12,7 +12,7 @@ int main(){
 	return 0;
 }
 
-int speed = 64;
+int speed = 50;
 bool leftLine = true;
 bool rightLine = true;
 bool forwardLine = true;
