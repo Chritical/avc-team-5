@@ -34,7 +34,7 @@ void detection(){
 					leftLine = false;
 				}
 			}
-			column += 20; //checks next point along the image
+			column += 33; //checks next point along the image
 		}
 		column = 160;
 		row = 320;
@@ -42,7 +42,7 @@ void detection(){
 			if(get_pixel(column, row, 0) != 0){
 				forwardLine = false; //checks if drive forward option is available
 			}
-			row -= 10; //checks next point down the image
+			row -= 20; //checks next point down the image
 		}
 		if(forwardLine){
 			straight();
