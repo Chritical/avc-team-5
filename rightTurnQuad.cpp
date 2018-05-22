@@ -12,26 +12,25 @@ int main(){
 	return 0;
 }
 
-int speed = 50;
+int speed = 30;
 bool leftLine = true;
 bool rightLine = true;
 bool forwardLine = true;
-bool turning = false;
 
 void detection(){
-	while(!turning){
+	while(true){
 		take_picture();
 		int column = 20;
 		int row = 120;
 		for(int i=0; i<9; i++){ //go through nine points in the image
-			if(i >= 5){ //check for a right turn
-				if(get_pixel(column, row, 0) != 0){
-					rightLine = false;
-				}
-			}
 			if(i <= 5){ //checks for a left turn
 				if(get_pixel(column, row, 0) != 0){
 					leftLine = false;
+				}
+			}
+			if(i >= 5){ //check for a right turn
+				if(get_pixel(column, row, 0) != 0){
+					rightLine = false;
 				}
 			}
 			column += 33; //checks next point along the image
@@ -63,30 +62,24 @@ void detection(){
 }
 
 void turnRight(){
-	turning = true;
 	straight(); //moves straight to get to turn
 	set_motor(1, speed);
 	set_motor(2, 0);
 	sleep1(1,0);
-	turning = false;
 	detection(); //restarts camera up again
 }
 
 void turnLeft(){
-	turning = true;
 	straight();
 	set_motor(1, 0);
-	set_motor(2, speed);
+	set_motor(2, -speed);
 	sleep1(1,0);
-	turning = false;
 	detection();
 }
 
 void straight(){ //move robot forward
-	turning = true;
 	set_motor(1, speed);
-	set_motor(2, speed);
+	set_motor(2, -speed);
 	sleep1(0,5000000);
-	turning = false;
 	detection();
 }
