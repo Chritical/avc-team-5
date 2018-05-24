@@ -44,7 +44,6 @@ int findThreshold() {
 		thr = (max+min)/2;
 	}
 		
-
 	return 0;
 }
 
@@ -116,14 +115,14 @@ void turnLeft(){
 
 void straight(){ //move robot forward
 	set_motor(1, speed);
-	set_motor(2, -speed);
+	set_motor(2, -speed * 1.2);
 	sleep1(0,5000000);
 	detection();
 }
 
 void turnAround(){ //move robot forward
 	set_motor(1, speed);
-	set_motor(2, speed);
+	set_motor(2, speed * 1.2);
 	sleep1(1, 0);
 	detection();
 }
