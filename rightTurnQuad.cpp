@@ -50,7 +50,9 @@ void detection(){
 	while(true){
 		take_picture();
 		
-		if (get_pixel(120, 160, 0)>180{
+		// If red is high AND green is low AND blue is low
+		//   Then it's red
+		if (get_pixel(120, 160, 0)>180 && get_pixel(120, 160, 1)<100 && get_pixel(120, 160, 2)<100){
 			set_motor(1, 0);
 			set_motor(2, 0);
 		}
