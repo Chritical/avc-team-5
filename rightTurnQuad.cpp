@@ -5,6 +5,7 @@ void detection();
 void turnLeft();
 void turnRight();
 void straight();
+void findThreshold();
 
 int main(){
 	init();
