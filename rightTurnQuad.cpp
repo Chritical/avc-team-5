@@ -102,7 +102,6 @@ void turnRight(){
 	set_motor(1, speed);
 	set_motor(2, 0);
 	sleep1(1,0);
-	detection(); //restarts camera up again
 }
 
 void turnLeft(){
@@ -110,19 +109,16 @@ void turnLeft(){
 	set_motor(1, 0);
 	set_motor(2, -speed * 1.2);
 	sleep1(1,0);
-	detection();
 }
 
 void straight(){ //move robot forward
 	set_motor(1, speed);
 	set_motor(2, -speed * 1.2);
 	sleep1(0,5000000);
-	detection();
 }
 
 void turnAround(){ //move robot forward
 	set_motor(1, speed);
 	set_motor(2, speed * 1.2);
 	sleep1(1, 0);
-	detection();
 }
