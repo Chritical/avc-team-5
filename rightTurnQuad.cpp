@@ -64,12 +64,14 @@ void detection(){
 		}
 		if(forwardLine){
 			straight();
-		}else if(leftLine == rightLine){
+		}else if(leftLine && rightLine){
 			turnLeft();
 		}else if(leftLine){
 			turnLeft();
 		}else if(rightLine){
 			turnRight();
+		} else{
+			turnAround();
 		}
 		rightLine = true;
 		leftLine = true;
@@ -100,5 +102,12 @@ void straight(){ //move robot forward
 	set_motor(1, speed);
 	set_motor(2, -speed);
 	sleep1(0,5000000);
+	detection();
+}
+
+void turnAround(){ //move robot forward
+	set_motor(1, speed);
+	set_motor(2, speed);
+	sleep1(1, 0);
 	detection();
 }
