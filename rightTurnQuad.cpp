@@ -43,7 +43,10 @@ int detect_white_line() {
 		
     } 
 	//find white and black pixels
-	thr = (max+min)/2;	
+	if (!max<100 && !min>150){
+		thr = (max+min)/2;
+	}
+		
 
 	return 0;
 }
