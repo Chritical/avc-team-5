@@ -93,7 +93,7 @@ void turnRight(){
 void turnLeft(){
 	straight();
 	set_motor(1, 0);
-	set_motor(2, -speed);
+	set_motor(2, -speed * 1.2);
 	sleep1(1,0);
 	detection();
 }
