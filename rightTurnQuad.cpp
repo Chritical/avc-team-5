@@ -18,7 +18,7 @@ bool rightLine = true;
 bool forwardLine = true;
 int thr;
 
-int detect_white_line() {
+int findThreshold() {
 	int max = 0;
 	int min = 255;
 	int scan_row = 120;
@@ -55,6 +55,7 @@ int detect_white_line() {
 void detection(){
 	while(true){
 		take_picture();
+		findThreshold();
 		
 // 		//find min and max
 //    	for (int i = 0; i < 320; i++)
