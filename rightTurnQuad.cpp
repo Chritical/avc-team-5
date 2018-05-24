@@ -22,9 +22,6 @@ int findThreshold() {
 	int max = 0;
 	int min = 255;
 	int scan_row = 120;
-	int error = 0;
-	int numWhite = 0;
-	int whi[320];  // white pixels
 	
 	take_picture();
 	
@@ -42,7 +39,7 @@ int findThreshold() {
 		}
 		
     } 
-	//find white and black pixels
+	//set threshold
 	if (!max<100 && !min>150){
 		thr = (max+min)/2;
 	}
@@ -57,23 +54,6 @@ void detection(){
 		take_picture();
 		findThreshold();
 		
-// 		//find min and max
-//    	for (int i = 0; i < 320; i++)
-// 	{
-// 		int pix = get_pixel(scan_row,i,3);
-// 		if ( pix > max) 
-// 		{
-// 			max = pix;
-// 		}
-// 		if (pix < min)
-// 		{
-// 			min = pix;
-// 		}
-		
-//     } 
-	
-// 	//find white and black pixels
-// 	int thr = (max+min)/2;
 		
 		int column = 20;
 		int row = 120;
