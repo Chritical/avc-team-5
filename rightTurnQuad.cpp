@@ -23,8 +23,6 @@ int findThreshold() {
 	int min = 255;
 	int scan_row = 120;
 	
-	take_picture();
-	
 	//find min and max
    	for (int i = 0; i < 320; i++)
 	{
@@ -51,6 +49,12 @@ int findThreshold() {
 void detection(){
 	while(true){
 		take_picture();
+		
+		if (get_pixel(120, 160, 0)>180{
+			set_motor(1, 0);
+			set_motor(2, 0);
+		}
+		
 		findThreshold();
 		
 		
