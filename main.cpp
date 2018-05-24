@@ -13,26 +13,30 @@ void Turn(int v_left, int v_right);
 int follow_line(int error);
 int detect_white_line();
 
-int SPEED = 32;
+int SPEED = 50;
 int dv;
-int quad = 2;
+int quad = 1;
+int BLACK_THRESHOLD = 100;
+int WHITE_THRESHOLD = 150;
 
 int main()
 {
     init();
     
     while (true)
-    {
+    {		
         switch (quad)
         {
             case 1:
                 open_gate();
-                sleep1(7, 0);
-		quad = 2;
+                //sleep1(1, 0);
+                left_motor(75);
+                right_motor(60);
+                sleep1(0, 200000);
+				quad = 2;
                 break;
             case 2:
-		detect_white_line();
-			
+				detect_white_line();
                 break;
             case 3:
                 break;
@@ -107,7 +111,7 @@ int detect_white_line() {
 		int pix = get_pixel(scan_row, i, 3);
 		if (pix > thr)
 		{
-			whi[i] = 1;speed * 1.5;
+			whi[i] = 1;
 			numWhite++;
 		}
 	}
@@ -118,9 +122,9 @@ int detect_white_line() {
 		error = error+((i-160)/numWhite)*whi[i];
 	}
 
-	if (max<150){ // if all black
+	if (max<BLACK_THRESHOLD){ // if all black
 		error = -10000;
-	} else if (min>150){ //if all white
+	} else if (min>WHITE_THRESHOLD){ //if all white
 		error = 10000;
 	}
 	
@@ -133,32 +137,34 @@ return 0;
 
 int follow_line(int error) {
 	int v_go = SPEED;
-	double Kp = 0.1;
+	double Kp = 0.15;
 	double dv;
 	int v_left;
 	int v_right;
 	
-//	while (true){
-		dv = error * Kp;
-		v_right = v_go + dv;
-		v_left = v_go - dv;
+	dv = error * Kp;
+	v_right = v_go + dv;
+	v_left = v_go - dv;
 
-		if (v_left > 255){
-			v_left = 255;
-		}
-		if (v_right > 255){
-			v_right = 255;
-		}
-		if (error > -1000 && error < 1000){
-			printf("L: %d    R: %d\n", v_left, v_right);
-			Turn(v_left, v_right);
-		}
-		
-		if (error > 1000){
-			left_motor(0);
-			right_motor(0);	
-//		}
-		
+	if (v_left > 255){
+		v_left = 255;
+	}
+	if (v_right > 255){
+		v_right = 255;
+	}
+	if (error > -1000 && error < 1000){
+		printf("L: %d    R: %d\n", v_left, v_right);
+		Turn(v_left, v_right);
+	}
+	
+	if (error >= 10000){
+		left_motor(0);
+		right_motor(0);	
+	}
+	else if (error <= -10000)
+	{
+		left_motor(-SPEED);
+		right_motor(-SPEED);
 	}
 	
 return 0;
