@@ -13,7 +13,7 @@ int main(){
  while (true){
       sleep1(2,0);
       
-      adc_right = analog_read(2);
+      adc_right = read_analog(2);
       printf("%d", adc_right);
       }
  }
