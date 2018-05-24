@@ -13,7 +13,7 @@ void Turn(int v_left, int v_right);
 int follow_line(int error);
 int detect_white_line();
 
-int SPEED = 50;
+int SPEED = 40;
 int dv;
 int quad = 1;
 int BLACK_THRESHOLD = 100;
@@ -137,7 +137,7 @@ return 0;
 
 int follow_line(int error) {
 	int v_go = SPEED;
-	double Kp = 0.15;
+	double Kp = 0.18;
 	double dv;
 	int v_left;
 	int v_right;
@@ -163,8 +163,8 @@ int follow_line(int error) {
 	}
 	else if (error <= -10000)
 	{
-		left_motor(-SPEED);
-		right_motor(-SPEED);
+		left_motor(-SPEED*0.9);
+		right_motor(-SPEED*0.9);
 	}
 	
 return 0;
