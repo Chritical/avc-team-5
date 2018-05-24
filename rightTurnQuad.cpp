@@ -21,34 +21,34 @@ void detection(){
 	while(true){
 		take_picture();
 		
-		//find min and max
-   	for (int i = 0; i < 320; i++)
-	{
-		int pix = get_pixel(scan_row,i,3);
-		if ( pix > max) 
-		{
-			max = pix;
-		}
-		if (pix < min)
-		{
-			min = pix;
-		}
+// 		//find min and max
+//    	for (int i = 0; i < 320; i++)
+// 	{
+// 		int pix = get_pixel(scan_row,i,3);
+// 		if ( pix > max) 
+// 		{
+// 			max = pix;
+// 		}
+// 		if (pix < min)
+// 		{
+// 			min = pix;
+// 		}
 		
-    } 
+//     } 
 	
-	//find white and black pixels
-	int thr = (max+min)/2;
+// 	//find white and black pixels
+// 	int thr = (max+min)/2;
 		
 		int column = 20;
 		int row = 120;
 		for(int i=0; i<9; i++){ //go through nine points in the image
 			if(i <= 5){ //checks for a left turn
-				if(get_pixel(column, row, 3) < thr){
+				if(get_pixel(column, row, 3) < 100){
 					leftLine = false;
 				}
 			}
 			if(i >= 5){ //check for a right turn
-				if(get_pixel(column, row, 3) < thr){
+				if(get_pixel(column, row, 3) < 100){
 					rightLine = false;
 				}
 			}
@@ -57,7 +57,7 @@ void detection(){
 		column = 160;
 		row = 280;
 		for(int i=0; i<4; i++){ //go through 4 points down the image
-			if(get_pixel(column, row, 3) < thr){
+			if(get_pixel(column, row, 3) < 100){
 				forwardLine = false; //checks if drive forward option is available
 			}
 			row -= 20; //checks next point down the image
