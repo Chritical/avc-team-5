@@ -15,6 +15,17 @@ int main(){
  
  while(inMaze){
    read(); // sensors will read values of surrondings
+    
+    error = adc_right - adc_left;      
+    
+    // center self in maze
+    if (error>0){
+       turn_right();
+    }
+    if (error<0){
+       turn_left;
+    }
+    
  
  //turn right for first two turns
  if(adc_left >= 550 && adc_right< 120 && adc_front >= 580){  
