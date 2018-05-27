@@ -6,7 +6,7 @@
 int main(){
    init();
  
- boolean inMaze = true;
+ bool inMaze = true;
  int adc_left;// left sensor - channel 0
  int adc_front; // front sensor - channel 1
  int adc_right; //right sensor - channel 2
@@ -16,39 +16,73 @@ int main(){
  while(inMaze){
    read(); // sensors will read values of surrondings
  
- //leftIR further from wall than rightIR. frontIR is close to wall. Turn left 
- if(adc_left<adc_right && adc_front >= 300){  
-    while(adc_left<adc_right && adc_front >= 300){ //turn left while right>left and robot front is close to wall
-       read();
-       turn_left();
-    }
-    stop();
- }
- 
- //rightIR further from wall than leftIR. frontIR is close to wall. Turn right
- else if(adc_right<adc_left && adc_front >= 300){ 
-   while(adc_left<adc_right && adc_front >= 300){
+ //turn right for first two turns
+ if(adc_left >= 550 && adc_right< 120 && adc_front >= 580){  
+    while(adc_front>=120 || adc_left<500){ 
        read();
        turn_right();
     }
     stop();
  }
     
- //rightIR, leftIR and frontIR have high readings. Turn around  
- else if(adc_right >= 300 && adc_left >= 300 && adc_front>= 300){
-   while(adc_right >= 300 && adc_left >= 300 && adc_front>= 300){
-      read();
-      turn_right(); 
-  }
-     stop();
- }
-  //if left wall closer than right (values < 100) and front close to wall. Turn left
-  else if(adc_left>adc_right && adc_front >= 300){
-   while(adc_left<adc_right && adc_front >= 300){
+ // turn left for the first alley instead of the alley with the gate
+  else if(adc_left <= 120 && adc_right > 500 && adc_front <= 120){
+   while(adc_right > 120 && adc_front > 120 && adc_left > 120){
        turn_left();
     }
     stop();
   }
+    
+    //turn right after the alley
+  if(adc_right>adc_left&& adc_right > 200 && adc_front >= 580){
+      while(adc_front>=120 || adc_left<500){ 
+           read();
+         turn_right();
+      }
+    stop();
+  }
+ 
+  //turn left
+  if(adc_right>adc_left&& adc_right < 200 && adc_front >= 580){
+      while(adc_front>=120 || adc_right<500){ 
+           read();
+         turn_left();
+      }
+    stop();
+  }
+    
+  // final left turn
+   if(adc_right >= 550 && adc_left< 120 && adc_front >= 580){  
+    while(adc_front>=120 || adc_right<500){ 
+       read();
+       turn_leftt();
+    }
+    stop();
+ }
+ 
+    
+ //rightIR, leftIR and frontIR have high readings. Turn around  
+ else if(adc_right >= 580 && adc_left >= 580 && adc_front>= 580){
+   while(adc_right >= 580 && adc_left >= 580 && adc_front>= 580){
+      read();
+      turn_right(); 
+      if(adc_right >= 580 && adc_left >= 580 && adc_front < 120){
+      break;
+      }
+  }
+     stop();
+ }
+    
+
+ 
+ 
+ else if(adc_left >= 580 && adc_right < 540 ){
+   //correct itself to the centre by making left wheel faster
+ }
+ else if(adc_right >= 580 && adc_left < 540 ){
+   //correct itself to the centre by making right wheel faster
+ }
+   
  
  // go forward
  else{
@@ -87,8 +121,7 @@ void read(){
  adc_left = read_analog(0); //reads left IR value
  adc_front = read_analog(1); //reads front IR value
  adc_right = read_analog(2); //reads right IR value
- print(adc_left+"L " + adc_front+"F "+ adc_right+"R");
+ printf("%dL %dF %dR",adc_left, adc_front, adc_right);
 }
 }
-//300 front
-//400 sides
+
