@@ -161,11 +161,11 @@ int follow_line(int error) {
 		left_motor(0);
 		right_motor(0);	
 	}
-	else if (error <= -10000)
-	{
-		left_motor(-SPEED*0.9);
-		right_motor(-SPEED*0.9);
-	}
+	//else if (error <= -10000)
+	//{
+	//	left_motor(-SPEED*0.9);
+	//	right_motor(-SPEED*0.9);
+	//}
 	
 return 0;
 }
